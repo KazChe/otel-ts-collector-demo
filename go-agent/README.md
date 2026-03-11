@@ -1,6 +1,6 @@
-# Go OTEL Agent with eBPF
+# Go OTEL Agent with eBPF - 00/using-cilium-ebpf-custom-tracec
 
-Go-based LLM agent with eBPF kernel-level observability, sending traces through the OTEL Collector to Jaeger and Galileo.
+Go-based LLM agent with eBPF kernel-level observability, sending traces through the OTEL Collector to Jaeger and Galileo. What we scaffolded for this brnach is a custom eBPF setup using cilium/ebpf directly - using our own trace.c and loader.
 
 ## Architecture
 
@@ -69,7 +69,7 @@ go-agent
 
 comes from a **specific era in observability tooling** when projects started combining **Go user-space agents with eBPF programs running inside the Linux kernel**.
 
-To understand it, the history goes roughly like this.
+To understand it, the history goes roughly something like this.
 
 ---
 

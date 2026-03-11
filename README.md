@@ -4,6 +4,9 @@ A self-contained TypeScript example showing how to send GenAI telemetry to Galil
 
 ## Architecture
 
+[!NOTE]
+
+
 ```
 +------------------+       +-------------------+       +--------------------+
 |  TypeScript App  | OTLP  |   OTEL Collector  | OTLP  |      Galileo       |
