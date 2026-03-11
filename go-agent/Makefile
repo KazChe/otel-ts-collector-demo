@@ -6,7 +6,7 @@ export
 
 # eBPF generation requires clang and bpftool
 generate-ebpf:
-	clang -O2 -g -target bpf -c bpf/trace.c -o bpf/trace.o
+	clang -O2 -g -target bpf -I/usr/include/aarch64-linux-gnu -c bpf/trace.c -o bpf/trace.o
 	bpftool gen skeleton bpf/trace.o > internal/ebpf/trace_bpfel.go || true
 
 build: generate-ebpf
