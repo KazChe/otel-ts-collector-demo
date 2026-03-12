@@ -5,3 +5,5 @@ dist/
 .vscode
 scripts/*
 *.o
+bin/
+*.tar.gz
