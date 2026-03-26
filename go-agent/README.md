@@ -20,6 +20,7 @@ Go Agent (LLM calls + eBPF kernel events)
 | `00/using-cilium-ebpf-custom-tracec` | [00 - Initial Setup](docs/00-initial-setup.md) | Scaffolding, OrbStack VM, eBPF toolchain, compiling trace.c |
 | `01/implementation-of-stubs` | [01 - Implementation of Stubs](docs/01-implementation-of-stubs.md) | Real OpenAI calls, tool execution loop, OTEL spans |
 | `02/the-rise-of-ebpf` | [02 - The Rise of eBPF](docs/02-the-rise-of-ebpf.md) | eBPF loader, tracepoint attach, ring buffer, kernel event spans |
+| `03/distributed-tracing-poc` | [03 - Distributed Tracing POC](docs/03-distributed-tracing-poc.md) | Python/LangGraph + TS distributed tracing, GalileoSpanProcessor, traceparent propagation |
 
 ## Quick Start
 
