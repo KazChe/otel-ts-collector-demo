@@ -1,0 +1,12 @@
+fastapi>=0.115.0
+uvicorn>=0.34.0
+httpx>=0.28.0
+langgraph>=0.2.0
+langchain-core>=0.3.0
+galileo
+opentelemetry-api>=1.29.0
+opentelemetry-sdk>=1.29.0
+opentelemetry-exporter-otlp
+opentelemetry-instrumentation-fastapi>=0.50b0
+opentelemetry-instrumentation-httpx>=0.50b0
+openinference-instrumentation-langchain

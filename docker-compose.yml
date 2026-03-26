@@ -14,14 +14,34 @@ services:
       - GALILEO_API_KEY=${GALILEO_API_KEY}
       - GALILEO_PROJECT=${GALILEO_PROJECT}
       - GALILEO_LOG_STREAM=${GALILEO_LOG_STREAM}
-    depends_on:
-      - jaeger
 
-  jaeger:
-    image: jaegertracing/all-in-one:1.62.0
-    container_name: jaeger
+  service-b-ts:
+    build: .
+    container_name: service-b-ts
     ports:
-      - "16686:16686"  # Jaeger UI
-      - "4317"         # OTLP gRPC (internal, collector connects here)
+      - "3000:3000"
     environment:
-      - COLLECTOR_OTLP_ENABLED=true
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_SERVICE_NAME=otel-ts-collector-demo
+      - USE_REAL_LLM=${USE_REAL_LLM:-false}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - PORT=3000
+    depends_on:
+      - otel-collector
+
+  service-a-python:
+    build: ./python-service
+    container_name: service-a-python
+    ports:
+      - "8000:8000"
+    environment:
+      - GALILEO_API_KEY=${GALILEO_API_KEY}
+      - GALILEO_PROJECT=${GALILEO_PROJECT}
+      - GALILEO_LOG_STREAM=${GALILEO_LOG_STREAM}
+      - GALILEO_CONSOLE_URL=${GALILEO_CONSOLE_URL}
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector:4318
+      - OTEL_SERVICE_NAME=python-langgraph-service
+      - TS_SERVICE_URL=http://service-b-ts:3000
+    depends_on:
+      - otel-collector
+      - service-b-ts

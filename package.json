@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npx tsx src/index.ts",
     "start:real": "USE_REAL_LLM=true npx tsx src/index.ts",
+    "start:server": "npx tsx src/server.ts",
     "infra:up": "docker compose up -d",
     "infra:down": "docker compose down",
     "build": "tsc"
@@ -13,14 +14,19 @@
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/exporter-trace-otlp-http": "^0.57.0",
+    "@opentelemetry/instrumentation": "^0.214.0",
+    "@opentelemetry/instrumentation-express": "^0.61.0",
+    "@opentelemetry/instrumentation-http": "^0.214.0",
     "@opentelemetry/resources": "^1.30.0",
     "@opentelemetry/sdk-trace-base": "^1.30.0",
     "@opentelemetry/sdk-trace-node": "^1.30.0",
     "@opentelemetry/semantic-conventions": "^1.28.0",
     "dotenv": "^16.4.5",
+    "express": "^5.2.1",
     "openai": "^4.73.0"
   },
   "devDependencies": {
+    "@types/express": "^5.0.6",
     "@types/node": "^22.0.0",
     "tsx": "^4.20.6",
     "typescript": "^5.8.0"

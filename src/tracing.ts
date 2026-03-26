@@ -3,6 +3,9 @@ import { Resource } from "@opentelemetry/resources";
 import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base";
 import { NodeTracerProvider } from "@opentelemetry/sdk-trace-node";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
+import { HttpInstrumentation } from "@opentelemetry/instrumentation-http";
+import { ExpressInstrumentation } from "@opentelemetry/instrumentation-express";
+import { registerInstrumentations } from "@opentelemetry/instrumentation";
 import {
   ATTR_SERVICE_NAME,
   ATTR_SERVICE_VERSION,
@@ -22,7 +25,8 @@ export function initTracing(): void {
   });
 
   const resource = new Resource({
-    [ATTR_SERVICE_NAME]: "otel-ts-collector-demo",
+    [ATTR_SERVICE_NAME]:
+      process.env.OTEL_SERVICE_NAME || "otel-ts-collector-demo",
     [ATTR_SERVICE_VERSION]: "1.0.0",
     "deployment.environment": process.env.DEPLOYMENT_ENV || "development",
   });
@@ -30,6 +34,13 @@ export function initTracing(): void {
   provider = new NodeTracerProvider({ resource });
   provider.addSpanProcessor(new BatchSpanProcessor(exporter));
   provider.register();
+
+  registerInstrumentations({
+    instrumentations: [
+      new HttpInstrumentation(),
+      new ExpressInstrumentation(),
+    ],
+  });
 
   console.log(
     `[tracing] OpenTelemetry initialized, exporting to ${collectorUrl}`,

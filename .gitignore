@@ -7,3 +7,5 @@ scripts/*
 *.o
 bin/
 *.tar.gz
+python-service/__pycache__/
+python-service/.venv/

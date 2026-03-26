@@ -241,7 +241,7 @@ async function runTurnSteps(
 // ---------------------------------------------------------------------------
 // Single conversation turn as its own trace (root span = invoke_agent)
 // ---------------------------------------------------------------------------
-async function runConversationTurn(
+export async function runConversationTurn(
   sessionId: string,
   userMessage: string,
   turnNumber: number,
