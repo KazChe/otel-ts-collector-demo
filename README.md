@@ -2,6 +2,20 @@
 
 A self-contained TypeScript example showing how to send GenAI telemetry to Galileo through an OpenTelemetry Collector, with a local Jaeger UI for visual span inspection.
 
+## Branches
+
+`main` covers the TypeScript app + collector. Separate branches add a Go agent with **eBPF kernel-level tracing**, built up in progressive steps. Each branch has its own README and a walkthrough under `go-agent/docs/`.
+
+| Branch | What it covers |
+|--------|----------------|
+| [`00/using-cilium-ebpf-custom-tracec`](https://github.com/KazChe/otel-ts-collector-demo/tree/00/using-cilium-ebpf-custom-tracec) | Scaffolds the Go agent and a custom [`cilium/ebpf`](https://github.com/cilium/ebpf) setup (`trace.c` plus loader skeleton) |
+| [`01/implementation-of-stubs`](https://github.com/KazChe/otel-ts-collector-demo/tree/01/implementation-of-stubs) | Fleshes out the Go agent and tool stubs that feed spans into the collector |
+| [`02/the-rise-of-ebpf`](https://github.com/KazChe/otel-ts-collector-demo/tree/02/the-rise-of-ebpf) | Loads the eBPF program into the kernel, attaches to the `sys_enter_connect` tracepoint, and emits TCP connect events as OTEL spans |
+| [`03/distributed-tracing-poc`](https://github.com/KazChe/otel-ts-collector-demo/tree/03/distributed-tracing-poc) | Bonus: Python/LangGraph to TypeScript/Express with automatic `traceparent` propagation |
+
+> [!NOTE]
+> eBPF requires Linux and root. On macOS, use a Linux VM (the `00` branch README walks through OrbStack).
+
 ## Architecture
 
 [!NOTE]
